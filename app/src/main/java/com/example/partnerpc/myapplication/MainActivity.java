@@ -1,6 +1,8 @@
 package com.example.partnerpc.myapplication;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -37,20 +39,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         webview.loadUrl("http://www.medfirst.com.tw/gift/index.php?forceDevice=mobile");
-        //spinbar.setVisibility(View.GONE);
     }
-
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            boolean close;
             if(webview.canGoBack()){
-                close =false;
                 webview.goBack();
             } else {
-                close = true;
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("結束應用程式")
+                        .setMessage("確定要結束嗎?")
+                        .setIcon(R.mipmap.ic_launcher)
+                        .setPositiveButton("確定",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                })
+                        .setNegativeButton("取消",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {}
+                                }).show();
             }
             event.startTracking();
-            return close;
+            return false;
         }
         return super.onKeyDown(keyCode, event);
     }

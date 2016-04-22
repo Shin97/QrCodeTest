@@ -2,12 +2,15 @@ package com.example.partnerpc.myapplication;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,9 +25,16 @@ public class MainActivity extends AppCompatActivity {
 
         progressBar = ProgressDialog.show(MainActivity.this, getResources().getString(R.string.loading), "請稍後");
 
-        webview = new WebView(this);
+        FloatingActionButton fab = (FloatingActionButton)findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Fab clicked", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        webview = (WebView) findViewById (R.id.webView);
         webview.getSettings().setJavaScriptEnabled(true);
-        setContentView(webview);
         webview.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

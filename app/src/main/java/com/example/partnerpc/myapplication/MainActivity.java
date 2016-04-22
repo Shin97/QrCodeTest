@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        progressBar = ProgressDialog.show(MainActivity.this, "讀取中", "請稍後");
+        progressBar = ProgressDialog.show(MainActivity.this, getResources().getString(R.string.loading), "請稍後");
 
         webview = new WebView(this);
         webview.getSettings().setJavaScriptEnabled(true);

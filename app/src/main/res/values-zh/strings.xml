@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">杏一禮讚</string>
+    <string name="app_name">杏e禮讚</string>
     <string name="loading">讀取中</string>
+    <string name="toggle_flash">閃光燈</string>
+    <string name="open_scanner">開啟QR Code掃描</string>
+    <string name="QrRequestCode">1</string>
+    <string name="URL">http://www.medfirst.com.tw/gift/index.php?forceDevice=mobile</string>
 </resources>

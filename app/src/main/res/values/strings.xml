@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">杏e禮讚</string>
     <string name="loading">loading</string>
+    <string name="toggle_flash">Toggle flash</string>
+    <string name="open_scanner">Open Scanner</string>
+    <string name="QrRequestCode">1</string>
+    <string name="URL">http://www.medfirst.com.tw/gift/index.php?forceDevice=mobile</string>
 </resources>

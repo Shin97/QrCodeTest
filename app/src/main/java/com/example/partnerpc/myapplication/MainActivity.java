@@ -44,30 +44,45 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         fab.hide();
-        webview = (WebView) findViewById (R.id.webView);
-        webview.getSettings().setJavaScriptEnabled(true);
-        webview.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
-            }
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                if (progressBar.isShowing()) {
-                    progressBar.dismiss();
-                    fab.show();
+
+        if(isConnected()){
+            webview = (WebView) findViewById(R.id.webView);
+            webview.getSettings().setJavaScriptEnabled(true);
+            webview.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    view.loadUrl(url);
+                    return true;
                 }
-            }
-        });
-        webview.loadUrl(getResources().getString(R.string.URL));
+
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    if (progressBar.isShowing()) {
+                        progressBar.dismiss();
+                        fab.show();
+                    }
+                }
+            });
+            webview.loadUrl(getResources().getString(R.string.URL));
+        }else {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("無網路連線")
+                    .setMessage("請檢察網路連線")
+                    .setIcon(R.mipmap.ic_launcher)
+                    .setPositiveButton("確定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    }).show();
+        }
     }
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if(webview.canGoBack()) {
                 webview.goBack();
-            } else if (QrBrowser) {
+            } else if (QrBrowser && !webview.canGoBack()) {
                 Intent intent = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent);
             } else {
@@ -93,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
-    Intent intent = getIntent();
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -102,17 +116,26 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this,"開啟網址:" + result, Toast.LENGTH_LONG).show();
             QrBrowser = true;
 
-            WebView QRWebView = new WebView(this);
-            QRWebView.getSettings().setJavaScriptEnabled(true);
-            QRWebView.setWebViewClient(new WebViewClient(){
+            webview = new WebView(this);
+            webview.getSettings().setJavaScriptEnabled(true);
+            webview.setWebViewClient(new WebViewClient(){
                 @Override
                 public boolean shouldOverrideUrlLoading(WebView view, String url) {
                     view.loadUrl(url);
                     return true;
                 }
             });
-            QRWebView.loadUrl(result);
-            setContentView(QRWebView);
+            webview.loadUrl(result);
+            setContentView(webview);
         }
+    }
+
+    private boolean isConnected(){
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;
+        }
+        return false;
     }
 }

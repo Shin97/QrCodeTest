@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
-              progressBar = ProgressDialog.show(MainActivity.this, getResources().getString(R.string.loading), "請稍後");
+              progressBar = ProgressDialog.show(MainActivity.this, getString(R.string.loading), "請稍後");
                 QrBrowser = false;
                      menu = (FloatingActionMenu) findViewById(R.id.menu);
                       fab = (FloatingActionButton)findViewById(R.id.CamFab);
@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
                     view.loadUrl(url);
                     return true;
                 }
-
                 @Override
                 public void onPageFinished(WebView view, String url) {
                     if (progressBar.isShowing()) {
@@ -96,9 +95,6 @@ public class MainActivity extends AppCompatActivity {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if(webview.canGoBack()) {
                 webview.goBack();
-            } else if (QrBrowser && !webview.canGoBack()) {
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(intent);
             } else {
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle("結束應用程式")
@@ -127,19 +123,9 @@ public class MainActivity extends AppCompatActivity {
 
         if(resultCode == QrRequestCode){
             String result = data.getExtras().getString("code");
-            QrBrowser = true;
-            webview = new WebView(this);
-            webview.getSettings().setJavaScriptEnabled(true);
-            webview.setWebViewClient(new WebViewClient(){
-                @Override
-                public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                    view.loadUrl(url);
-                    return true;
-                }
-            });
-            webview.loadUrl(result);
-            setContentView(webview);
-            Snackbar.make(webview,getString(R.string.open_url) + result,Snackbar.LENGTH_LONG).show();
+            Intent intent = new Intent(MainActivity.this, BrowserActivity.class);
+            intent.putExtra("URL",result);
+            startActivity(intent);
         }
     }
 

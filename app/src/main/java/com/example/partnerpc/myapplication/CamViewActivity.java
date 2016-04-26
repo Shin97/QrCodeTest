@@ -8,14 +8,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 import eu.livotov.labs.android.camview.ScannerLiveView;
-import eu.livotov.labs.android.camview.camera.CameraController;
 import eu.livotov.labs.android.camview.scanner.decoder.zxing.ZXDecoder;
 
 
 public class CamViewActivity extends AppCompatActivity {
 
     private ScannerLiveView camera;
-    private CameraController controller;
     private boolean flashStatus;
 
     private int QrRequestCode = 1;

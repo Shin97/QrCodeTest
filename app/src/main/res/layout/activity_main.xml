@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/loading"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/coordinatorLayout">
 
     <WebView
         android:layout_width="fill_parent"
@@ -16,16 +18,37 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"/>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/CamFab"
+    <com.github.clans.fab.FloatingActionMenu
+        app:layout_behavior="com.example.partnerpc.myapplication.FloatingActionMenuBehavior"
+        android:id="@+id/menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right|bottom"
-        android:layout_margin="16dp"
-        app:backgroundTint="#FF0000"
-        app:borderWidth="0dp"
-        android:clickable="true"
-        android:src="@drawable/ic_add_circle_outline_white"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        fab:menu_labels_style="@style/MenuLabelsStyle"
+        fab:menu_labels_ellipsize="end"
+        fab:menu_labels_singleLine="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/CamFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add_circle_outline_white"
+            fab:fab_size="mini"
+            fab:fab_label="@string/qr_code" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_plus"
+            fab:fab_size="mini"
+            fab:fab_label="Menu item 2" />
+
+    </com.github.clans.fab.FloatingActionMenu>
 
 </android.support.design.widget.CoordinatorLayout>

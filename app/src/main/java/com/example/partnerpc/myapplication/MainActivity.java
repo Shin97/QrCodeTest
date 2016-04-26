@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,35 +15,48 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 
 public class MainActivity extends AppCompatActivity {
 
+    private CoordinatorLayout coordinatorLayout;
     private WebView webview;
     private ProgressDialog progressBar;
+    private FloatingActionMenu menu;
     private FloatingActionButton fab;
+    private FloatingActionButton fab2;
     private int QrRequestCode = 1;
     private boolean QrBrowser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
-        progressBar = ProgressDialog.show(MainActivity.this, getResources().getString(R.string.loading), "請稍後");
-        QrBrowser = false;
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinatorLayout);
+              progressBar = ProgressDialog.show(MainActivity.this, getResources().getString(R.string.loading), "請稍後");
+                QrBrowser = false;
+                     menu = (FloatingActionMenu) findViewById(R.id.menu);
+                      fab = (FloatingActionButton)findViewById(R.id.CamFab);
+                     fab2 = (FloatingActionButton)findViewById(R.id.menu_item2);
 
-        fab = (FloatingActionButton)findViewById(R.id.CamFab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, getResources().getString(R.string.open_scanner), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, CamViewActivity.class);
                 startActivityForResult(intent, QrRequestCode);
             }
         });
-        fab.hide();
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Snackbar.make(coordinatorLayout, "無作用按鈕", Snackbar.LENGTH_LONG).show();
+            }
+        });
+
+        menu.hideMenu(false);
 
         if(isConnected()){
             webview = (WebView) findViewById(R.id.webView);
@@ -59,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onPageFinished(WebView view, String url) {
                     if (progressBar.isShowing()) {
                         progressBar.dismiss();
-                        fab.show();
+                        menu.showMenu(true);
                     }
                 }
             });
@@ -77,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     }).show();
         }
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event){
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -113,9 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(resultCode == QrRequestCode){
             String result = data.getExtras().getString("code");
-            Toast.makeText(MainActivity.this,"開啟網址:" + result, Toast.LENGTH_LONG).show();
             QrBrowser = true;
-
             webview = new WebView(this);
             webview.getSettings().setJavaScriptEnabled(true);
             webview.setWebViewClient(new WebViewClient(){
@@ -127,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
             });
             webview.loadUrl(result);
             setContentView(webview);
+            Snackbar.make(webview,getString(R.string.open_url) + result,Snackbar.LENGTH_LONG).show();
         }
     }
 

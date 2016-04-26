@@ -4,6 +4,8 @@
     <string name="loading">讀取中</string>
     <string name="toggle_flash">閃光燈</string>
     <string name="open_scanner">開啟QR Code掃描</string>
-    <string name="QrRequestCode">1</string>
     <string name="URL">http://www.medfirst.com.tw/gift/index.php?forceDevice=mobile</string>
+    <string name="qr_code">QR Code 掃描</string>
+    <string name="open_url">開啟網址  </string>
+    <string name="return_home">返回首頁</string>
 </resources>

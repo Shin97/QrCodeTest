@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.design.widget.CoordinatorLayout;
@@ -52,7 +53,9 @@ public class MainActivity extends AppCompatActivity {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(coordinatorLayout, "無作用按鈕", Snackbar.LENGTH_LONG).show();
+                //Snackbar.make(coordinatorLayout, "無作用按鈕", Snackbar.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, ListViewActivity.class);
+                startActivity(intent);
             }
         });
 

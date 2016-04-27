@@ -23,19 +23,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".CamViewActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="enum" />
             </intent-filter>
         </activity>
-        <activity android:name=".BrowserActivity"></activity>
+
+        <activity
+            android:name=".BrowserActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".ListViewActivity"
+            android:theme="@style/OtherTheme">
+        </activity>
     </application>
 
 </manifest>

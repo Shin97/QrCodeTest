@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_plus"
             fab:fab_size="mini"
-            fab:fab_label="Menu item 2" />
+            fab:fab_label="List View" />
 
     </com.github.clans.fab.FloatingActionMenu>
 

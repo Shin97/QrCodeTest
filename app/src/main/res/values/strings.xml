@@ -7,4 +7,5 @@
     <string name="qr_code">QR Code scanner</string>
     <string name="open_url">Open URL  </string>
     <string name="return_home">Return Home</string>
+    <string name="json_source"><![CDATA[http://dev.medfirst.ewebs.tw/website/api/api.app_medfirst.php?service=ORDER_QUERY&apikey=316E6D71AC9565BD18B6E93EA50C64B8&data=%7B%22milktea%22:%2267fbc9ce0c00cb10c467ae43883e53fc04effc180bff0de2%22%7D]]></string>
 </resources>

@@ -4,10 +4,20 @@
     android:layout_height="match_parent"
     android:id="@+id/ListCL">
 
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent" android:layout_height="fill_parent"
+            android:scrollbars="vertical" android:fadingEdge="vertical">
+
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/text_view"/>-->
+
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/list_view"
-            />
+            android:id="@+id/list_view"/>
+
+        </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

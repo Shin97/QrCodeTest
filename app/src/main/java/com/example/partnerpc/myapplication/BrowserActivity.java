@@ -50,7 +50,7 @@ public class BrowserActivity extends AppCompatActivity {
                 }
             }
         });
-        Snackbar.make(coordinatorLayout, getString(R.string.open_url), Snackbar.LENGTH_LONG).show();
+        Snackbar.make(coordinatorLayout, getString(R.string.open_url)+" "+url, Snackbar.LENGTH_LONG).show();
         webview.loadUrl(url);
     }
 

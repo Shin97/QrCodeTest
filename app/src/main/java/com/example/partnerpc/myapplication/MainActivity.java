@@ -25,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private WebView webview;
     private ProgressDialog progressBar;
     private FloatingActionMenu menu;
-    private FloatingActionButton fab;
-    private FloatingActionButton fab2;
+    private FloatingActionButton fab,fab2,fab3;
     private int QrRequestCode = 1;
     private boolean QrBrowser;
 
@@ -39,8 +38,9 @@ public class MainActivity extends AppCompatActivity {
               progressBar = ProgressDialog.show(MainActivity.this, getString(R.string.loading), "請稍後");
                 QrBrowser = false;
                      menu = (FloatingActionMenu) findViewById(R.id.menu);
-                      fab = (FloatingActionButton)findViewById(R.id.CamFab);
-                     fab2 = (FloatingActionButton)findViewById(R.id.menu_item2);
+                      fab = (FloatingActionButton)findViewById(R.id.cam_fab);
+                     fab2 = (FloatingActionButton)findViewById(R.id.list_fab);
+                     //fab3 = (FloatingActionButton)findViewById(R.id.menu_item3);
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -53,11 +53,19 @@ public class MainActivity extends AppCompatActivity {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Snackbar.make(coordinatorLayout, "無作用按鈕", Snackbar.LENGTH_LONG).show();
                 Intent intent = new Intent(MainActivity.this, ListViewActivity.class);
                 startActivity(intent);
             }
         });
+
+//        fab3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //Snackbar.make(coordinatorLayout, "無作用按鈕", Snackbar.LENGTH_LONG).show();
+//                Intent intent = new Intent(MainActivity.this, ListViewActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
         menu.hideMenu(false);
 
